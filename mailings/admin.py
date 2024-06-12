@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from mailings.models import ServiceClient, MailingSettings
+from mailings.models import Client, MailingSettings
 
 
-@admin.register(ServiceClient)
-class ServiceClientAdmin(admin.ModelAdmin):
+@admin.register(Client)
+class ClientAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'comment',)
     list_filter = ('name', 'email',)
 

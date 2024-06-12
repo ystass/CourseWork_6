@@ -4,7 +4,7 @@ from datetime import timedelta, time
 NULLABLE = {'null': True, 'blank': True}
 
 
-class ServiceClient(models.Model):
+class Client(models.Model):
     name = models.CharField(max_length=50, verbose_name='Имя')
     email = models.EmailField(max_length=50, verbose_name='email', unique=True)
     comment = models.TextField(verbose_name='комментирии', **NULLABLE)
@@ -43,7 +43,7 @@ class MailingSettings(models.Model):
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default=CREATED, verbose_name='статус')
     title = models.CharField(max_length=50, verbose_name='тема')
     text = models.TextField(verbose_name='письмо')
-    client = models.ForeignKey(ServiceClient, on_delete=models.CASCADE, verbose_name='клиент')
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, verbose_name='клиент')
 
     def __str__(self):
         return f'{self.title} time: {self.start_time} - {self.end_time}, periodicity: {self.periodicity}, status: {self.status}'
@@ -59,7 +59,7 @@ class Log(models.Model):
     server_response = models.CharField(verbose_name='ответ почтового сервера', **NULLABLE)
 
     mailing_list = models.ForeignKey(MailingSettings, on_delete=models.CASCADE, verbose_name='рассылка')
-    client = models.ForeignKey(ServiceClient, on_delete=models.CASCADE, verbose_name='клиент', **NULLABLE)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, verbose_name='клиент', **NULLABLE)
 
     def __str__(self):
         return f'{self.time} {self.status}'
