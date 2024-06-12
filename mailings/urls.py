@@ -6,5 +6,5 @@ from mailings.views import ServiceClientListView
 app_name = MailingsConfig.name
 
 urlpatterns = [
-    path('mailings/', ServiceClientListView.as_view(), name='mailings_list'),
+    path('', ServiceClientListView.as_view(), name='mailings_list'),
 ]
