@@ -1,6 +1,9 @@
 {% extends 'mailings/base.html' %}
 
 {% block content %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h2 class="display-1">Страница клиентов</h2>
+</div>
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -25,6 +28,11 @@
                 </div>
             </div>
             {% endfor %}
+        </div>
+        <div class="row text-right mt-4">
+            <div class="col-12">
+                <a class="btn btn-secondary my-2" href="{% url 'mailings:client_create' %}">Создать клиента</a>
+            </div>
         </div>
     </div>
 </div>
