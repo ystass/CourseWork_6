@@ -15,7 +15,7 @@
                         <p class="card-text">Периодичность: {{ object.periodicity }}</p>
                         <p class="card-text">Статус: {{ object.status }}</p>
                         <p class="card-text">Клиенты: </p>
-                        {% for client in mailingsettings.clients.all %}
+                        {% for client in mailingsettings.client.all %}
                             <p class="card-text"> {{ client.name }}</p>
                         {% endfor %}
                         <div class="d-flex justify-content-between align-items-center">
