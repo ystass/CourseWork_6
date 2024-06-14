@@ -43,7 +43,7 @@ class MailingSettings(models.Model):
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default=CREATED, verbose_name='статус')
     title = models.CharField(max_length=50, verbose_name='тема')
     text = models.TextField(verbose_name='письмо')
-    client = models.ForeignKey(Client, on_delete=models.CASCADE, verbose_name='клиент')
+    client = models.ManyToManyField(Client, verbose_name='клиент')
 
     def __str__(self):
         return f'{self.title} time: {self.start_time} - {self.end_time}, periodicity: {self.periodicity}, status: {self.status}'

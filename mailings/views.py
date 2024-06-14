@@ -40,7 +40,7 @@ class MailingSettingsDetailView(DetailView):
 
 class MailingSettingsCreateView(CreateView):
     model = MailingSettings
-    fields = ('start_time', 'end_time', 'periodicity', 'status', 'title', 'text')
+    fields = ('client', 'start_time', 'end_time', 'periodicity', 'status', 'title', 'text')
     success_url = reverse_lazy('mailings:mailingsettings_list')
 
 
