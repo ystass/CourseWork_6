@@ -21,6 +21,7 @@ def send_email(message_settings, message_client):
             time=datetime.datetime.now(datetime.timezone.utc),
             status="Успешно",
             mailing_list=message_settings,
+            client=message_client.pk,
         )
     except smtplib.SMTPException as e:
         Log.objects.create(
@@ -28,6 +29,7 @@ def send_email(message_settings, message_client):
             status="Ошибка",
             server_response=str(e),
             mailing_list=message_settings,
+            client=message_client.pk,
         )
 
 
