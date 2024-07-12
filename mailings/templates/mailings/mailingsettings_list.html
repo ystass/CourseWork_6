@@ -20,8 +20,10 @@
                         <th><h4>Статус рассылки</h4></th>
                         <th><h4>Тема</h4></th>
                         <th><h4>Посмотреть рассылку</h4></th>
+                        {% if user.is_authenticated %}
                         <th><h4>Редактировать рассылку</h4></th>
                         <th><h4>Удалить рассылку</h4></th>
+                        {% endif %}
                     </tr>
                     {% for object in object_list %}
                     <tr>
@@ -33,6 +35,7 @@
                             <a class="btn btn-lg btn-primary"
                                href="{% url 'mailings:mailingsettings_detail' object.pk %}">Просмотр</a>
                         </h6></td>
+                        {% if user.is_authenticated %}
                         <td><h6>
                             <a class="btn btn-lg btn-warning"
                                href="{% url 'mailings:mailingsettings_update' object.pk %}">Редактирование</a>
@@ -41,16 +44,19 @@
                             <a class="btn btn-lg btn-danger"
                                href="{% url 'mailings:mailingsettings_delete' object.pk %}">Удаление</a>
                         </h6></td>
+                        {% endif %}
                     {% endfor %}
                     </tr>
                 </table>
             </div>
         </div>
     </div>
+    {% if user.is_authenticated %}
     <div class="row text-right mt-4">
         <div class="col-12">
             <a class="btn btn-secondary my-2" href="{% url 'mailings:mailingsettings_create' %}">Создать рассылку</a>
         </div>
     </div>
+    {% endif %}
 </div>
 {% endblock %}

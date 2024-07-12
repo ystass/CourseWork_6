@@ -18,10 +18,12 @@
                             <div class="btn">
                                 <a class="btn btn-primary" href="{% url 'mailings:client_detail' object.pk %}"
                                    role="button">Посмотреть</a>
-                                <a class="btn btn-success" href="{% url 'mailings:client_update' object.pk %}"
-                                   role="button">Редактировать</a>
-                                <a class="btn btn-danger" href="{% url 'mailings:client_delete' object.pk %}"
-                                   role="button">Удалить</a>
+                                {% if user.is_authenticated %}
+                                    <a class="btn btn-success" href="{% url 'mailings:client_update' object.pk %}"
+                                        role="button">Редактировать</a>
+                                    <a class="btn btn-danger" href="{% url 'mailings:client_delete' object.pk %}"
+                                        role="button">Удалить</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
