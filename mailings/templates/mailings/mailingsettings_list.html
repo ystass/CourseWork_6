@@ -19,11 +19,13 @@
                         <th><h4>Периодичность рассылки</h4></th>
                         <th><h4>Статус рассылки</h4></th>
                         <th><h4>Тема</h4></th>
+
                         <th><h4>Посмотреть рассылку</h4></th>
-                        {% if user.is_authenticated %}
+
                         <th><h4>Редактировать рассылку</h4></th>
+
                         <th><h4>Удалить рассылку</h4></th>
-                        {% endif %}
+
                     </tr>
                     {% for object in object_list %}
                     <tr>
@@ -31,15 +33,21 @@
                         <td><h6>{{ object.periodicity }}</h6></td>
                         <td><h6>{{ object.status }}</h6></td>
                         <td><h6>{{ object.title }}</h6></td>
+
                         <td><h6>
+                            {% if perms.mailings.view_all_mailings or user == object.owner or user.is_superuser %}
                             <a class="btn btn-lg btn-primary"
                                href="{% url 'mailings:mailingsettings_detail' object.pk %}">Просмотр</a>
+                            {% endif %}
                         </h6></td>
-                        {% if user.is_authenticated %}
+
+                        {% if perms.mailings.deactivate_mailing or user == object.owner or user.is_superuser %}
                         <td><h6>
                             <a class="btn btn-lg btn-warning"
                                href="{% url 'mailings:mailingsettings_update' object.pk %}">Редактирование</a>
                         </h6></td>
+                        {% endif %}
+                        {% if user == object.owner or user.is_superuser %}
                         <td><h6>
                             <a class="btn btn-lg btn-danger"
                                href="{% url 'mailings:mailingsettings_delete' object.pk %}">Удаление</a>

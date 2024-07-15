@@ -11,7 +11,7 @@ class ClientAdmin(admin.ModelAdmin):
 
 @admin.register(MailingSettings)
 class MailingSettingsAdmin(admin.ModelAdmin):
-    list_display = ('title', 'periodicity', 'status',)
+    list_display = ('title', 'periodicity', 'status', 'owner')
     list_filter = ('client', 'title',)
 
 

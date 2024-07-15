@@ -22,7 +22,7 @@
                             <div class="btn-group">
                                 <a class="btn btn-primary" href="{% url 'mailings:mailingsettings_list' %}"
                                    role="button">Вернуться</a>
-                                {% if user.is_authenticated %}
+                                {% if perms.mailings.deactivate_mailing or user == object.owner or user.is_superuser %}
                                 <a class="btn btn-success" href="{% url 'mailings:mailingsettings_update' object.pk %}"
                                    role="button">Редактировать</a>
                                 {% endif %}

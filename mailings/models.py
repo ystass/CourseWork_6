@@ -54,6 +54,10 @@ class MailingSettings(models.Model):
     class Meta:
         verbose_name = 'настройка рассылки'
         verbose_name_plural = 'настройки рассылок'
+        permissions = [
+            ('deactivate_mailing', 'Can deactivate mailing'),
+            ('view_all_mailings', 'Can view all mailings'),
+        ]
 
 
 class Log(models.Model):
