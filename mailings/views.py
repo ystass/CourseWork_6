@@ -1,10 +1,27 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 
+from blog.services import get_articles_from_cache
 from mailings.forms import MailingSettingsForm, ModeratorMailingSettingsForm
 from mailings.models import Client, MailingSettings, Log
+
+
+class HomePageView(TemplateView):
+
+    template_name = 'mailings/home_page.html'
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        mailings = MailingSettings.objects.all()
+        clients = Client.objects.all()
+        context_data['all_mailings'] = mailings.count()
+        context_data['active_mailings'] = mailings.filter(status=MailingSettings.STARTED).count()
+        context_data['active_clients'] = clients.values('email').distinct().count()
+
+        context_data['random_blogs'] = get_articles_from_cache().order_by('?')[:3]
+        return context_data
 
 
 class ClientListView(ListView):
