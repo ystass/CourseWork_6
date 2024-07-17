@@ -32,11 +32,13 @@
             </div>
             {% endfor %}
         </div>
+        {% if user.is_authenticated %}
         <div class="row text-right mt-4">
             <div class="col-12">
                 <a class="btn btn-secondary my-2" href="{% url 'mailings:client_create' %}">Создать клиента</a>
             </div>
         </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
